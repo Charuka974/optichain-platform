@@ -1,0 +1,158 @@
+{
+	"info": {
+		"name": "OptiChain Backend API",
+		"description": "Postman collection for the OptiChain platform backend. Includes authentication, ML predictions, and history tracking.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@optichain.com\",\r\n  \"password\": \"securepassword123\",\r\n  \"role\": \"analyst\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.access_token) {",
+									"    pm.collectionVariables.set(\"token\", jsonData.access_token);",
+									"} else if (jsonData.token) {",
+									"    pm.collectionVariables.set(\"token\", jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@optichain.com\",\r\n  \"password\": \"securepassword123\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Predictions",
+			"item": [
+				{
+					"name": "Predict Delay",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Type\": \"DEBIT\",\r\n  \"Customer Segment\": \"Consumer\",\r\n  \"Shipping Mode\": \"Standard Class\",\r\n  \"Market\": \"Pacific Asia\",\r\n  \"Order Region\": \"Southeast Asia\",\r\n  \"Category Name\": \"Sporting Goods\",\r\n  \"Customer City\": \"Caguas\",\r\n  \"Customer Country\": \"Puerto Rico\",\r\n  \"Customer State\": \"PR\",\r\n  \"Order City\": \"Bekasi\",\r\n  \"Order Country\": \"Indonesia\",\r\n  \"Order State\": \"Java Occidental\",\r\n  \"Department Name\": \"Fitness\",\r\n  \"Order Status\": \"COMPLETE\",\r\n  \"order date (DateOrders)\": \"1/31/2018 22:56\",\r\n  \"Sales\": 327.75,\r\n  \"Order Item Quantity\": 1,\r\n  \"Order Item Product Price\": 327.75,\r\n  \"Order Item Discount\": 13.11,\r\n  \"Order Item Discount Rate\": 0.04,\r\n  \"Sales per customer\": 314.64,\r\n  \"Order Item Total\": 314.64\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/predict",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"predict"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Prediction History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/predictions/history",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"predictions",
+								"history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
