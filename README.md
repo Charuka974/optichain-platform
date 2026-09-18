@@ -10,6 +10,15 @@ Developed as a group project for the **GDSE Machine Learning Module**.
 
 ---
 
+# 👥 Team
+
+* **Charuka Hansaja**
+* **Kamesh Nethsara**
+* **Nisal Sahansith**
+* **Sasindu Denuwan**
+
+---
+
 ## 🚀 Live Application
 
 ### Frontend
@@ -507,15 +516,6 @@ The frontend is deployed separately using Vercel.
 | Backend     | https://optichain-backend-427525760401.us-central1.run.app      |
 | Swagger API | https://optichain-backend-427525760401.us-central1.run.app/docs |
 | GitHub      | https://github.com/Charuka974/optichain-platform                |
-
----
-
-# 👥 Team
-
-* **Charuka Hansaja**
-* **Kamesh Nethsara**
-* **Nisal Sahansith**
-* **Sasindu Denuwan**
 
 ---
 
